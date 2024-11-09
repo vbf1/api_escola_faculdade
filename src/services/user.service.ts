@@ -1,6 +1,7 @@
 import { IUser } from "../interfaces/user.interface";
 import yup from "yup";
 import { UserRepository } from "../repositories/user.repository";
+import { ClassRepository } from "../repositories/class.repository";
 
 export const validationUserSchema = yup.object().shape({
   name: yup.string().required("você deve fornecer um nome."),
@@ -52,6 +53,18 @@ class UserService {
 
   static async findUserByEmail(email: string) {
     return await UserRepository.findUserByEmail(email);
+  }
+
+  static async findStudentsByClassId(class_id: number) {
+    const existClass = await ClassRepository.findClassById(class_id);
+
+    if (!existClass) {
+      throw new Error(`Class with ID: ${class_id} not exist`);
+    }
+
+    const user = await UserRepository.findStudentsByClassId(class_id);
+
+    return user;
   }
 
   static async create(data: IUser) {

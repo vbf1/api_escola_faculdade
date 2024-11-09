@@ -9,6 +9,19 @@ class UserController {
     return response.send(result);
   }
 
+  async findStudentsByClassId(request: Request<IParams>, response: Response) {
+    const { class_id } = request.params;
+    const parsed = parseInt(class_id);
+    try {
+      const result = await UserService.findStudentsByClassId(parsed);
+      return response.json(result);
+    } catch (err: any) {
+      return response.status(400).send({
+        error: err.message,
+      });
+    }
+  }
+
   //   async getListUserExpense(request: Request, response: Response) {
   //     const { userId } = request.params;
   //     try {

@@ -6,15 +6,8 @@ import { messageRouter } from "./routes/message.route.js";
 
 const app: Express = express();
 
-//cors
-const corsOptions = {
-  origin: "http://localhost:3000",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-};
-
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 //routes
 app.use(userRouter);

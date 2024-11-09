@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import { UserController } from "../controllers/user.controller";
+import { IParams } from "../interfaces/params.interface";
 
 const userRouter = Router();
 
@@ -12,6 +13,13 @@ userRouter.post("/signup", (request: Request, response: Response) => {
 userRouter.get("/users", (request: Request, response: Response) => {
   return userController.getAllUsers(request, response);
 });
+
+userRouter.get(
+  "/students-by-class/:class_id",
+  (request: Request<IParams>, response: Response) => {
+    return userController.findStudentsByClassId(request, response);
+  }
+);
 
 // userRouter.get(
 //   "/get-list-user-expense/:userId",

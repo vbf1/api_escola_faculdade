@@ -3,7 +3,7 @@ import { prismaClient } from "../database/client";
 import bcrypt from "bcrypt";
 import { IMessage } from "../interfaces/message.interface";
 
-class MessageRepository {
+class ClassRepository {
   //   static async findUserByEmail(email: string) {
   //     const userExists = await prismaClient.user.findUnique({
   //       where: {
@@ -44,10 +44,10 @@ class MessageRepository {
   //     return classe;
   //   }
 
-  static async getAllMessages() {
-    return await prismaClient.message.findMany({
-      include: {
-        userID: true,
+  static async findClassById(class_id: number) {
+    return await prismaClient.class.findFirst({
+      where: {
+        id: class_id,
       },
     });
   }
@@ -118,15 +118,15 @@ class MessageRepository {
   //     return listExpenses;
   //   }
 
-  static async create({ content, user_id, recipient_user_id }: IMessage) {
-    return await prismaClient.message.create({
-      data: {
-        content,
-        user_id,
-        recipient_user_id,
-      },
-    });
-  }
+  //   static async create({ content, user_id, recipient_user_id }: IMessage) {
+  //     return await prismaClient.message.create({
+  //       data: {
+  //         content,
+  //         user_id,
+  //         recipient_user_id,
+  //       },
+  //     });
+  //   }
 
   //   static async delete(userId: string) {
   //     return await prismaClient.user.delete({
@@ -149,4 +149,4 @@ class MessageRepository {
   //   }
 }
 
-export { MessageRepository };
+export { ClassRepository };

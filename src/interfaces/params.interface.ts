@@ -1,3 +1,3 @@
 export interface IParams {
-  userId: string;
+  class_id: string;
 }

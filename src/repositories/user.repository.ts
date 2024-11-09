@@ -13,6 +13,20 @@ class UserRepository {
     return userExists;
   }
 
+  static async findStudentsByClassId(class_id: number) {
+    const user = await prismaClient.user.findMany({
+      where: {
+        class_id,
+        type_user_id: 2,
+      },
+      include: {
+        class: true,
+      },
+    });
+
+    return user;
+  }
+
   static async findUserById(user_id: string) {
     const user = await prismaClient.user.findUnique({
       where: {
